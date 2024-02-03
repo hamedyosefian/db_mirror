@@ -16,6 +16,7 @@ COPY ./alembic /code/alembic
 COPY ./entrypoint.sh /code/entrypoint.sh
 
 
+
 RUN chmod +x /code/entrypoint.sh
 
 CMD ["/code/entrypoint.sh"]
