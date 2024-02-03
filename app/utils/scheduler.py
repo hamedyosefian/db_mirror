@@ -9,7 +9,7 @@ scheduler.start()
 def setup_scheduler_jobs():
     scheduler.add_job(
         create_backup,
-        trigger=IntervalTrigger(minutes=5),
+        trigger=IntervalTrigger(minutes=1),
         id='backup_job',
         name='Backup databases with schedule',
         replace_existing=True
