@@ -21,7 +21,12 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 # target_metadata = [Model1Base.metadata, Model2Base.metadata]
-target_metadata = None
+# target_metadata = None
+from app.database import Base
+from app.models.databases import Database
+from app.models.backup import BackupTarget
+
+target_metadata = Base.metadata
 
 
 # other values from the config, defined by the needs of env.py,

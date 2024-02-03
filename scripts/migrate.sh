@@ -1,1 +1,2 @@
+cd ..
 alembic upgrade head

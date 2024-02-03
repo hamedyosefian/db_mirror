@@ -12,7 +12,6 @@ class Database(Base):
     __tablename__ = "databases"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    # id: Mapped[int] = mapped_column(primary_key=True,index=True)
     name: Mapped[str] = mapped_column(unique=True)
     host: Mapped[str]
     port: Mapped[int]
@@ -20,4 +19,4 @@ class Database(Base):
     password: Mapped[str]
     database_name: Mapped[str]
 
-    backup_targets: Mapped[list["BackupTarget"]] = relationship(back_populates="database")
+    # backup_targets: Mapped[list["BackupTarget"]] = relationship(back_populates="database")
