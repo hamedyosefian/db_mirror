@@ -1,4 +1,4 @@
-FROM python:3.12
+FROM 192.168.0.5:8082/python:3.12
 
 WORKDIR /code
 
