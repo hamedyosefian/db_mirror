@@ -55,6 +55,10 @@ def create_backup():
 
                 print(f"Uploaded to S3: s3://backups/{filename}")
 
+                # Remove the local backup file after successful upload
+                os.remove(backup_path)
+                print(f"Local backup file removed: {backup_path}")
+
             except subprocess.CalledProcessError as e:
                 print(f"Backup failed for {database.database_name}: {e}")
 
