@@ -3,7 +3,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     # SQLALCHEMY_DATABASE_URL: str = 'sqlite:///./test.db'
-    SQLALCHEMY_DATABASE_URL: str = 'postgresql://cls5xr4af0020a5ow3jn0aoh9:c3TOywSIpWzA2UpeOdquc8Ay@192.168.0.20:9003/dbmirror'
+    # SQLALCHEMY_DATABASE_URL: str = 'postgresql://hamedyousefian:12345678@127.0.0.1:5432/dbmirror'
+    SQLALCHEMY_DATABASE_URL: str = 'postgresql://postgres:j5vDMvtbKcJGDPyoZsVhdOXFHVm7D8q37FKwP3LW1FmA8mU3IplkAK3OcfVx9CX2@192.168.0.20:9005/dbmirror'
 
     S3_ACCESS_KEY: str = "pAu8fSv3SkGSPk0NSbnR"
     S3_SECRET_key: str = "ENYWgxaLQ5EzMFuz0iir2dw1cGa7iI4u4k5YOfWA"

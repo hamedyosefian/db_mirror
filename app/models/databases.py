@@ -18,5 +18,6 @@ class Database(Base):
     username: Mapped[str]
     password: Mapped[str]
     database_name: Mapped[str]
+    backup_period: Mapped[int]
 
     # backup_targets: Mapped[list["BackupTarget"]] = relationship(back_populates="database")
