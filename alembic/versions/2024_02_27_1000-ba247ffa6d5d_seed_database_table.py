@@ -30,8 +30,8 @@ def upgrade() -> None:
                            'username': 'postgres',
                            'password': 'RkIG6lXKVgBFaZDA5hgsCx5AY0RlKfCJio2VohgtWTsyusPAT02163aO16kbFhM2',
                            'database_name': 'mobedu',
-                           'differential_backup_cron': '*/5 * * * *',
-                           'full_backup_cron': '*/15 * * * *',
+                           'differential_backup_cron': '*/15 * * * *',
+                           'full_backup_cron': '30 0 * * *',
                        },
                        {
                            'id': 2,
@@ -41,8 +41,8 @@ def upgrade() -> None:
                            'username': 'postgres',
                            'password': 'oGbHTzygVGtksrNnLHyMTjkWdEQ1WIzAwfYPb8feFEVUYrxOM2hu8DqkXc5Z8QOT',
                            'database_name': 'mobexam',
-                           'differential_backup_cron': '*/5 * * * *',
-                           'full_backup_cron': '*/15 * * * *',
+                           'differential_backup_cron': '*/15 * * * *',
+                           'full_backup_cron': '30 0 * * *',
                        },
                        {
                            'id': 3,
@@ -52,8 +52,8 @@ def upgrade() -> None:
                            'username': 'postgres',
                            'password': 'nZeMeg9a7IdFu5PTX1D7mIG7qLnkdJUmf8u8XZJFVX0JkwlFA5748DGbrIfwh1zj',
                            'database_name': 'automob',
-                           'differential_backup_cron': '*/5 * * * *',
-                           'full_backup_cron': '*/15 * * * *',
+                           'differential_backup_cron': '*/15 * * * *',
+                           'full_backup_cron': '30 0 * * *',
                        },
 
                        {
@@ -64,8 +64,8 @@ def upgrade() -> None:
                            'username': 'postgres',
                            'password': 'mmnhaIyV2mKsqPg9L08HB7TRvgQe2uE1eVUKtEbJteoeMZ3e555iXJTRZNxjgyiX',
                            'database_name': 'regexam',
-                           'differential_backup_cron': '*/5 * * * *',
-                           'full_backup_cron': '*/15 * * * *',
+                           'differential_backup_cron': '*/15 * * * *',
+                           'full_backup_cron': '30 0 * * *',
                        },
                        {
                            'id': 5,
@@ -75,8 +75,8 @@ def upgrade() -> None:
                            'username': 'clt00ev2d000fa4n6cemo8ggf',
                            'password': 'phuVsa81CQSpQMIq7c7ZJnvq',
                            'database_name': 'exam',
-                           'differential_backup_cron': '*/5 * * * *',
-                           'full_backup_cron': '*/15 * * * *',
+                           'differential_backup_cron': '*/15 * * * *',
+                           'full_backup_cron': '30 0 * * *',
                        },
                        {
                            'id': 6,
@@ -86,8 +86,8 @@ def upgrade() -> None:
                            'username': 'postgres',
                            'password': 'dbTlKU8kfvINuVKgmYFawk5QMIDVeeue0DSqHitoWgFNpDyiJBE0hxxaOj9Bqq78',
                            'database_name': 'ae_db',
-                           'differential_backup_cron': '*/5 * * * *',
-                           'full_backup_cron': '*/15 * * * *',
+                           'differential_backup_cron': '*/15 * * * *',
+                           'full_backup_cron': '30 0 * * *',
                        },
                    ]
                    )
