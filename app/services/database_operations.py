@@ -1,5 +1,6 @@
 import os
 import subprocess
+import time
 from datetime import datetime
 
 import psycopg2
@@ -34,9 +35,21 @@ def create_backup(database, backup_type):
     if not check_pg_dump_availability():
         return {"error": "pg_dump is not available."}
 
-    if not check_database_connection(database.host, database.port, database.username, database.database_name, database.password):
+    # Retry mechanism
+    max_retries = 3
+    retry_delay = 10  # seconds
+    for attempt in range(max_retries):
+        if attempt > 0:
+            print(f"Retrying backup for {database.database_name}, attempt {attempt + 1}")
+            time.sleep(retry_delay)
+
+        if check_database_connection(database.host, database.port, database.username, database.database_name, database.password):
+            break
+    else:
+        print("Max retries reached, aborting backup.")
         return
 
+    # Proceed with backup after successful connection check
     backup_dir = f'backups/{database.id}-{database.database_name}/{backup_type}'
     os.makedirs(backup_dir, exist_ok=True)
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
@@ -44,7 +57,6 @@ def create_backup(database, backup_type):
     backup_path = os.path.join(backup_dir, filename)
 
     os.environ['PGPASSWORD'] = database.password
-
     command = [
         "pg_dump",
         f"--host={database.host}",
@@ -64,7 +76,7 @@ def create_backup(database, backup_type):
                           endpoint_url=settings.S3_URL)
         with open(backup_path, 'rb') as file_obj:
             s3.upload_fileobj(Fileobj=file_obj, Bucket='backups', Key=f"{database.id}-{database.database_name}/{backup_type}/{filename}")
-            
+
         print(f"Uploaded to S3: s3://backups/{filename}")
         os.remove(backup_path)
         print(f"Local backup file removed: {backup_path}")
