@@ -81,7 +81,7 @@ def upgrade() -> None:
                        {
                            'id': 6,
                            'name': 'Energy Database',
-                           'host': '89.38.215.145',
+                           'host': '192.168.0.40',
                            'port': 9001,
                            'username': 'postgres',
                            'password': 'dbTlKU8kfvINuVKgmYFawk5QMIDVeeue0DSqHitoWgFNpDyiJBE0hxxaOj9Bqq78',

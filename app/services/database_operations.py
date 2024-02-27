@@ -31,6 +31,26 @@ def check_database_connection(host, port, username, dbname, password):
         return False
 
 
+def remove_differential_backups_s3(database, bucket_name, diff_backup_prefix):
+    s3 = boto3.client("s3",
+                      aws_access_key_id=settings.S3_ACCESS_KEY,
+                      aws_secret_access_key=settings.S3_SECRET_key,
+                      endpoint_url=settings.S3_URL)
+
+    try:
+        # List all objects within the specified differential backup folder (path)
+        diff_backup_objects = s3.list_objects_v2(Bucket=bucket_name, Prefix=diff_backup_prefix)
+        if 'Contents' in diff_backup_objects:
+            for obj in diff_backup_objects['Contents']:
+                print(f"Removing {obj['Key']} from S3")
+                s3.delete_object(Bucket=bucket_name, Key=obj['Key'])
+            print("Differential backups removed from S3.")
+        else:
+            print("No differential backups found to remove.")
+    except Exception as e:
+        print(f"Failed to delete differential backups from S3. Reason: {e}")
+
+
 def create_backup(database, backup_type):
     if not check_pg_dump_availability():
         return {"error": "pg_dump is not available."}
@@ -80,6 +100,11 @@ def create_backup(database, backup_type):
         print(f"Uploaded to S3: s3://backups/{filename}")
         os.remove(backup_path)
         print(f"Local backup file removed: {backup_path}")
+
+        if backup_type == 'full':
+            diff_backup_prefix = f"{database.id}-{database.database_name}/diff/"
+            remove_differential_backups_s3(database, 'backups', diff_backup_prefix)
+
     except subprocess.CalledProcessError as e:
         print(f"Backup failed for {database.database_name}: {e}")
     finally:
