@@ -1,8 +1,8 @@
-"""seed data to database table
+"""seed database table
 
-Revision ID: e5280e1e86d4
-Revises: b23aaf5a8d55
-Create Date: 2024-02-26 15:35:50.293197
+Revision ID: ba247ffa6d5d
+Revises: 79ce85f3f520
+Create Date: 2024-02-27 10:00:08.111739
 
 """
 from typing import Sequence, Union
@@ -13,8 +13,8 @@ import sqlalchemy as sa
 from app.models.databases import Database
 
 # revision identifiers, used by Alembic.
-revision: str = 'e5280e1e86d4'
-down_revision: Union[str, None] = 'b23aaf5a8d55'
+revision: str = 'ba247ffa6d5d'
+down_revision: Union[str, None] = '79ce85f3f520'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
@@ -30,7 +30,8 @@ def upgrade() -> None:
                            'username': 'postgres',
                            'password': 'RkIG6lXKVgBFaZDA5hgsCx5AY0RlKfCJio2VohgtWTsyusPAT02163aO16kbFhM2',
                            'database_name': 'mobedu',
-                           'backup_period': 60
+                           'differential_backup_cron': '*/5 * * * *',
+                           'full_backup_cron': '*/15 * * * *',
                        },
                        {
                            'id': 2,
@@ -40,7 +41,8 @@ def upgrade() -> None:
                            'username': 'postgres',
                            'password': 'oGbHTzygVGtksrNnLHyMTjkWdEQ1WIzAwfYPb8feFEVUYrxOM2hu8DqkXc5Z8QOT',
                            'database_name': 'mobexam',
-                           'backup_period': 60
+                           'differential_backup_cron': '*/5 * * * *',
+                           'full_backup_cron': '*/15 * * * *',
                        },
                        {
                            'id': 3,
@@ -50,7 +52,8 @@ def upgrade() -> None:
                            'username': 'postgres',
                            'password': 'nZeMeg9a7IdFu5PTX1D7mIG7qLnkdJUmf8u8XZJFVX0JkwlFA5748DGbrIfwh1zj',
                            'database_name': 'automob',
-                           'backup_period': 60
+                           'differential_backup_cron': '*/5 * * * *',
+                           'full_backup_cron': '*/15 * * * *',
                        },
 
                        {
@@ -61,7 +64,8 @@ def upgrade() -> None:
                            'username': 'postgres',
                            'password': 'mmnhaIyV2mKsqPg9L08HB7TRvgQe2uE1eVUKtEbJteoeMZ3e555iXJTRZNxjgyiX',
                            'database_name': 'regexam',
-                           'backup_period': 60
+                           'differential_backup_cron': '*/5 * * * *',
+                           'full_backup_cron': '*/15 * * * *',
                        },
                        {
                            'id': 5,
@@ -71,7 +75,19 @@ def upgrade() -> None:
                            'username': 'clt00ev2d000fa4n6cemo8ggf',
                            'password': 'phuVsa81CQSpQMIq7c7ZJnvq',
                            'database_name': 'exam',
-                           'backup_period': 60
+                           'differential_backup_cron': '*/5 * * * *',
+                           'full_backup_cron': '*/15 * * * *',
+                       },
+                       {
+                           'id': 6,
+                           'name': 'Energy Database',
+                           'host': '89.38.215.145',
+                           'port': 9001,
+                           'username': 'postgres',
+                           'password': 'dbTlKU8kfvINuVKgmYFawk5QMIDVeeue0DSqHitoWgFNpDyiJBE0hxxaOj9Bqq78',
+                           'database_name': 'ae_db',
+                           'differential_backup_cron': '*/5 * * * *',
+                           'full_backup_cron': '*/15 * * * *',
                        },
                    ]
                    )

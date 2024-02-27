@@ -30,17 +30,17 @@ def check_database_connection(host, port, username, dbname, password):
         return False
 
 
-def create_backup(database):
+def create_backup(database, backup_type):
     if not check_pg_dump_availability():
         return {"error": "pg_dump is not available."}
 
     if not check_database_connection(database.host, database.port, database.username, database.database_name, database.password):
         return
 
-    backup_dir = 'backups'
+    backup_dir = f'backups/{database.id}-{database.database_name}/{backup_type}'
     os.makedirs(backup_dir, exist_ok=True)
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    filename = f"{database.database_name}_{timestamp}.sql"
+    filename = f"{database.database_name}_{backup_type}_{timestamp}.sql"
     backup_path = os.path.join(backup_dir, filename)
 
     os.environ['PGPASSWORD'] = database.password
@@ -63,8 +63,8 @@ def create_backup(database):
                           aws_secret_access_key=settings.S3_SECRET_key,
                           endpoint_url=settings.S3_URL)
         with open(backup_path, 'rb') as file_obj:
-            s3.upload_fileobj(Fileobj=file_obj, Bucket='backups', Key=filename)
-
+            s3.upload_fileobj(Fileobj=file_obj, Bucket='backups', Key=f"{database.id}-{database.database_name}/{backup_type}/{filename}")
+            
         print(f"Uploaded to S3: s3://backups/{filename}")
         os.remove(backup_path)
         print(f"Local backup file removed: {backup_path}")
